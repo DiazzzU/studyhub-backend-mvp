@@ -1,0 +1,23 @@
+version: "2"
+
+services:
+  app:
+    image: diazzzu/studyhub:studyhub_back
+    environment:
+      - DB_PORT=secret
+      - DB_NAME=secret
+      - DB_HOST=secret
+      - DB_USER=secret
+      - DB_PASSWORD=secret
+      - DEBUG=secret
+      - GOOGLE_APPLICATION_CREDENTIALS=secret
+    command: >
+            bash -c "python manage.py makemigrations && python manage.py migrate 
+            && python manage.py runserver 0.0.0.0:8000"
+    volumes:
+      - .data:/studyhub/data
+    network_mode: "host"
+    ports:
+      - "8000:8000"
+
+    restart: on-failure
